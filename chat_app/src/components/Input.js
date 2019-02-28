@@ -1,18 +1,34 @@
 import React from "react";
 
 class Input extends React.Component {
-  state = {
-    value: "Chat"
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      value: "Chat"
+    };
+  }
+
+  handleChange = e => {
+    e.persist();
+    this.setState({ value: e.target.value });
   };
 
-  handleChange(event) {
-    this.setState({ value: event.target.value });
-  }
+  handleKeyPress = e => {
+    e.preventDefault();
+    if (e.key === "Enter") {
+      console.log("yas");
+    }
+  };
 
   render() {
     return (
       <div>
-        <input value="Chat" onChange={this.handleChange} />
+        <input
+          value={this.state.value}
+          onChange={this.handleChange}
+          onKeyPress={this.props.showMessage}
+        />
       </div>
     );
   }
